@@ -99,7 +99,7 @@
 
             <div class="row home-content__main">
                 <h1>
-                Hello folks, we are <br>
+<!--                Hello folks, we are <br>-->
                 Walmart Postal services.
                 </h1>
 
@@ -286,16 +286,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- Java Script
     ================================================== -->
-    <script>
-        function fetchShortestPath(){
-<!--            To DO-->
-            
-        }
-    </script>
+
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 
+    <script>
+        $('#inputGroupFile04').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+                console.log(fileName);
+            })
+        function fetchShortestPath(){
+<!--            To DO-->
+            console.out.log("BBOM");
+        }
+    </script>
 </body>
 
 </html>
