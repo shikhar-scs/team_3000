@@ -30,6 +30,14 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
+    <style>
+        /* Set the size of the div element that contains the map */
+        #g_map {
+            height: 600px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+    </style>
+
 </head>
 
 <body id="top">
@@ -109,12 +117,15 @@
                 </p>
                 <div class="container" id="cuti">
                 <div class="input-group row">
+                    <form ref='uploadForm' id='uploadForm' method='post'  encType="multipart/form-data">
+
                     <div class="custom-file col-sm-11">
-                        <input style="font-size: 3.3rem;" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                        <label class="custom-file-label" for="inputGroupFile04" style="background-color: transparent">Choose file</label>
+                        <input style="font-size: 3.3rem;" type="file" name="sampleFile" accept=".csv"  id="inputGroupFile04" required/>
+<!--                        <label for="inputGroupFile04" style="background-color: transparent">Choose file</label>-->
                     </div>
+                    </form>
                     <div class="input-group-append col-sm-1" >
-                       <a> <button class="btn btn-outline-secondary cuti-btn" type="button" id="inputGroupFileAddon04">Upload</button>
+                       <a> <button class="btn btn-outline-secondary cuti-btn" id="submit_btn">Upload</button>
                     </div>
                 </div>
                 </div>
@@ -157,10 +168,10 @@
     <section id='map' class="s-services light-gray">
 
         <div class="row section-header" data-aos="fade-up">
-            <div class="col-full">
-                <h3 class="subhead">MAP</h3>
-                <h1 class="display-1">We have everything you need to launch and grow a successful digital business.</h1>
+            <div class="col-full" id="g_map">
+
             </div>
+            <h4 class="" id ="display_values">We have everything you need to launch and grow a successful digital business.</h4>
         </div> <!-- end section-header -->
 
 <!--        <div class="row" data-aos="fade-up">-->
@@ -378,6 +389,106 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+
+
+    <script>
+        var map;
+        function send_image(e) {
+            var sampleFile = new FormData($('#uploadForm')[0]);
+            $.ajax({
+                url: "/fileupload",
+                type: 'POST',
+                data: sampleFile,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                }
+            }).done( (m) => {
+                let center = m.split("$$")[0].split(",")
+                map.setCenter(new google.maps.LatLng(parseFloat(center[0]), parseFloat(center[1])))
+                data=m.split("$$")[1]
+                console.log(data)
+                debugger
+                data = data.substring(2).slice(0, -3).split("], [")
+                data.forEach((d) => {
+                    let k = d.split(", ")
+
+                    new google.maps.Marker({position: {lat: parseFloat(k[0]), lng: parseFloat(k[1])}, map: map});
+                })
+
+                generate_directions(center, data);
+                // $("#color_image").attr("src","http://localhost:3000/dist/image_Output/img_0.png")
+            })
+        }
+        $('#submit_btn').click(()=>send_image())
+
+        function generate_directions(center, data) {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map);
+            var waypts = [];
+            data.forEach((d) => {
+                let k = d.split(", ")
+                waypts.push({
+                  location: {lat: parseFloat(k[0]), lng: parseFloat(k[1])}  ,
+                    stopover: true
+                })
+            })
+            directionsService.route({
+                origin: {lat: parseFloat(center[0]), lng: parseFloat(center[1])},
+                destination: {lat: parseFloat(center[0]), lng: parseFloat(center[1])},
+                waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                    var route = response.routes[0];
+                    console.log(route)
+                    var total_dist = 0
+                    var total_time = 0
+                    // For each route, display summary information.
+                    for (var i = 0; i < route.legs.length; i++) {
+                         total_dist += route.legs[i].distance.value
+                        total_time += route.legs[i].duration.value
+                    }
+                    total_dist/=1609
+                    total_time/=60
+                    var display_values = document.getElementById("display_values")
+                    var str = "Total Distance = " + total_dist.toFixed(2) +  " miles. Total travel Time =  " + total_time.toFixed(2) + " min." + " Postage & Handling Time = " + route.legs.length*2 + " mins. (2 mins per drop)"
+                    display_values.innerText = str;
+
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            })
+
+        }
+
+
+
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru,
+            var uluru = {lat: 37.625086, lng: -122.433593};
+            // The map, centered at Uluru
+            map = new google.maps.Map(
+                document.getElementById('g_map'), {zoom: 12, center: uluru});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHhznVjkzisWwTBaAnVEImPWf6L0xoq4U&callback=initMap">
+    </script>
+
 
 </body>
 

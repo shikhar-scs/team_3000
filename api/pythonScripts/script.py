@@ -44,8 +44,8 @@ for index, row in zipcode.iterrows():
         lat=row['LAT']
         long=row['LNG']
 
-rand_x = [float(random.randrange(300, 800))/100 for i in range(0,len(offers))]
-rand_y = [float(random.randrange(300, 800))/100 for i in range(0,len(offers))]
+rand_x = [float(random.randrange(200, 500))/100 for i in range(0,len(offers))]
+rand_y = [float(random.randrange(200, 500))/100 for i in range(0,len(offers))]
 
 r_earth = 3958.8
 pi = 3.14
@@ -61,4 +61,4 @@ with open('api/csvFiles/finalCoords.csv', 'w') as writeFile:
     writer = csv.writer(writeFile)
     writer.writerows(coords)
 
-os.system("python3 api/pythonScripts/clusterize.py")
+os.system("python3 api/pythonScripts/clusterize.py " + str(lat) + " " + str(long))

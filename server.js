@@ -12,8 +12,8 @@ const http = require('http')
 const routes = {
 //    login: require('./api/login').route,
 //    dashboard: require('./api/dashboard').route,
-    python: require('./api/python').route,
-    csvfiles: require('./api/csvfiles').route
+    python: require('./api/python').route
+    // csvfiles: require('./api/csvfiles').route
 };
 
 app.use(bodyParser.json());
@@ -22,13 +22,13 @@ app.use(bodyParser.urlencoded({extended:true}));
 //app.use('/login', routes.login);
 //app.use('/dashboard', routes.dashboard);
 app.use('/python', routes.python);
-app.use('/csvfiles', routes.csvfiles);
+// app.use('/csvfiles', routes.csvfiles);
 
 
-//app.use(express.static(path.join(__dirname,'/frontendWorks')));
+app.use(express.static(path.join(__dirname,'/frontend')));
 
 app.get('/',(req,res)=>{
-    res.redirect('/html');
+    res.sendFile(path.join(__dirname+'/frontend/index.html'));
 });
 
 //app.get('/home',(req,res)=>{

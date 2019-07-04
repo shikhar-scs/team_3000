@@ -6,6 +6,7 @@ router.get('/', (req,res) => {
 
     vision()
         .then((result)=>{
+            // router.post('/result', {resu:result}, (d)=>{console.log(d)})
             res.send(result)
         })
 
