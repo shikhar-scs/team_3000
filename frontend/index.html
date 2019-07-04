@@ -116,18 +116,15 @@
                 to calculate the optimum path.
                 </p>
                 <div class="container" id="cuti">
-                <div class="input-group row">
-                    <form ref='uploadForm' id='uploadForm' method='post'  encType="multipart/form-data">
-
-                    <div class="custom-file col-sm-11">
-                        <input style="font-size: 3.3rem;" type="file" name="sampleFile" accept=".csv"  id="inputGroupFile04" required/>
-<!--                        <label for="inputGroupFile04" style="background-color: transparent">Choose file</label>-->
+                    <div class="input-group row">
+                        <div class="custom-file col-sm-11">
+                            <input style="font-size: 3.3rem;" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                            <label class="custom-file-label" for="inputGroupFile04" style="background-color: transparent">Choose file</label>
+                        </div>
+                        <div class="input-group-append col-sm-1" >
+                            <a> <button onclick="fetchShortestPath()" class="btn btn-outline-secondary cuti-btn" type="button" id="inputGroupFileAddon04">Upload</button>
+                        </div>
                     </div>
-                    </form>
-                    <div class="input-group-append col-sm-1" >
-                       <a> <button class="btn btn-outline-secondary cuti-btn" id="submit_btn">Upload</button>
-                    </div>
-                </div>
                 </div>
 
             </div> <!-- end home-content__main -->
@@ -183,7 +180,7 @@
             <div class="col-full">
                 <h3 class="subhead subhead--light">Contact Us</h3>
                 <h1 class="display-1 display-1--light">TEAM 3000!!</h1>
-                <h4 class="display-1 display-1--light">Get in touch at for a superior experience!!</h4>
+                <h4 class="display-1 display-1--light">Get in touch for a superior experience!!</h4>
             </div>
         </div> <!-- end section-header -->
 
@@ -304,6 +301,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
     <script>
+         $('#inputGroupFile04').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+                console.log(fileName);
+            })
         var map;
         function send_image(e) {
             var sampleFile = new FormData($('#uploadForm')[0]);
