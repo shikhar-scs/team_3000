@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Walmart HyperDelivery</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Set the size of the div element that contains the map */
+        #g_map {
+            height: 600px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+        #gp_map {
+            height: 600px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+    </style>
+
+</head>
+
+<body id="top">
+
+<!-- header
+================================================== -->
+<header class="s-header">
+
+    <!--        <div class="header-logo">-->
+    <!--            <a class="site-logo" href="index.html">-->
+    <!--                <img src="images/logo.svg" alt="Homepage">-->
+    <!--            </a>-->
+    <!--        </div> &lt;!&ndash; end header-logo &ndash;&gt;-->
+
+    <nav class="header-nav">
+
+        <a href="#0" class="header-nav__close" title="close"><span>Close</span></a>
+
+        <div class="header-nav__content">
+            <h3>LAST MILE DELIVERY</h3>
+
+            <ul class="header-nav__list">
+                <li class="current"><a class="smoothscroll"  href="#home" title="home">Home</a></li>
+                <li><a class="smoothscroll"  href="#map" title="map">Map</a></li>
+                <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>
+
+            </ul>
+
+            <!--                <p>Perspiciatis hic praesentium nesciunt. Et neque a dolorum <a href='#0'>voluptatem</a> porro iusto sequi veritatis libero enim. Iusto id suscipit veritatis neque reprehenderit.</p>-->
+
+            <ul class="header-nav__social">
+                <li>
+                    <a href="#0"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-behance"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-dribbble"></i></a>
+                </li>
+            </ul>
+
+        </div> <!-- end header-nav__content -->
+
+    </nav> <!-- end header-nav -->
+
+    <a class="header-menu-toggle" href="#0">
+        <span class="header-menu-icon"></span>
+    </a>
+
+</header> <!-- end s-header -->
+
+
+<!-- home
+================================================== -->
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/uberlyft.jpg" data-natural-width=2500 data-natural-height=1800 data-position-y=top>
+
+    <div class="shadow-overlay"></div>
+
+    <div class="home-content">
+
+        <div class="row home-content__main">
+            <h1>
+                <!--                Hello folks, we are <br>-->
+                Walmart Uber Collaboration
+            </h1>
+
+        </div> <!-- end home-content__main -->
+
+    </div> <!-- end home-content -->
+
+    <ul class="home-sidelinks">
+        <li style="display: none"><a class="smoothscroll"><span></span></a></li>
+        <li><a class="smoothscroll" href="#map">Map<span>Find optimum path</span></a></li>
+        <li><a  class="smoothscroll" href="#contact">Contact<span>get in touch</span></a></li>
+    </ul> <!-- end home-sidelinks -->
+
+    <ul class="home-social">
+        <li class="home-social-title">Follow Us</li>
+        <li><a href="#0">
+            <i class="fab fa-facebook"></i>
+            <span class="home-social-text">Facebook</span>
+        </a></li>
+        <li><a href="#0">
+            <i class="fab fa-twitter"></i>
+            <span class="home-social-text">Twitter</span>
+        </a></li>
+        <li><a href="#0">
+            <i class="fab fa-linkedin"></i>
+            <span class="home-social-text">LinkedIn</span>
+        </a></li>
+    </ul> <!-- end home-social -->
+
+    <a href="#contact" class="home-scroll smoothscroll">
+        <span class="home-scroll__text">Scroll Down</span>
+        <span class="home-scroll__icon"></span>
+    </a> <!-- end home-scroll -->
+
+</section> <!-- end s-home -->
+
+
+
+<section id='map' class="s-services light-gray">
+
+    <div class="row section-header" data-aos="fade-up">
+        <div class="col-full col-5" style="margin-left: 5vw" >
+            <div id="g_map"></div>
+            <h6 class="" id ="display_values_0"></h6>
+
+        </div>
+
+        <div class="col-full col-5" style="margin-left: 5vw" >
+            <div id="gp_map"></div>
+            <h6 class="" id ="display_values_1"></h6>
+
+        </div>
+
+
+    </div> <!-- end section-header -->
+
+
+</section> <!-- end s-services -->
+
+<section id="contact" class="s-contact">
+
+    <div class="row section-header" data-aos="fade-up">
+        <div class="col-full">
+            <h3 class="subhead subhead--light">Contact Us</h3>
+            <h1 class="display-1 display-1--light">TEAM 3000!!</h1>
+            <h4 class="display-1 display-1--light">Get in touch at for a superior experience!!</h4>
+        </div>
+    </div> <!-- end section-header -->
+
+    <div class="row">
+
+        <div class="col-full contact-main" data-aos="fade-up">
+            <p>
+                <a class="contact-email">Walmart, "Love You 3000!!" </a>
+                <span class="contact-number">+ (91) 080 4035 8008</span>
+            </p>
+        </div> <!-- end contact-main -->
+
+    </div> <!-- end row -->
+
+    <div class="row">
+
+        <div class="col-five tab-full contact-secondary" data-aos="fade-up">
+            <h3 class="subhead subhead--light">Where To Find Us</h3>
+
+            <p class="contact-address">
+                Block B, Ground Floor, Hall Mark building, Outer Ring Rd, Kaverappa Layout, Kadabeesanahalli, Bengaluru<br>
+                Karnataka, India 560103
+            </p>
+        </div> <!-- end contact-secondary -->
+
+        <div class="col-five tab-full contact-secondary" data-aos="fade-up">
+            <h3 class="subhead subhead--light">Follow Us</h3>
+
+            <ul class="contact-social">
+                <li>
+                    <a href="#0"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-behance"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fab fa-dribbble"></i></a>
+                </li>
+            </ul> <!-- end contact-social -->
+
+
+
+        </div> <!-- end row -->
+        <div class="row" >
+            <div class="col-full cl-copyright" style="font-size:3px">
+                <span style="font-size:0px"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+            </div>
+
+            <div class="cl-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up" aria-hidden="true"></i></a>
+            </div>
+
+</section> <!-- end s-contact -->
+
+
+<!-- photoswipe background
+================================================== -->
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                    "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                    "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+                "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+
+
+<!-- preloader
+================================================== -->
+<div id="preloader">
+    <div id="loader">
+    </div>
+</div>
+
+
+<!-- Java Script
+================================================== -->
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+
+<script>
+    var map, gp_map;
+
+    function initMap() {
+        map = new google.maps.Map(
+            document.getElementById('g_map'), {zoom: 12});
+        gp_map = new google.maps.Map(
+            document.getElementById('gp_map'), {zoom: 12});
+    }
+
+
+
+        var comp_ride_data = [[[34.868734,	-81.227643],	[34.984404,	81.21328],	[34.996214,	-81.14361],	[35.102754, -81.25231]],
+            [[35.146213, -80.954235], [35.177407,	-80.927398] 	,	[35.049212,	-80.993428] ,	[35.024407,	-81.028598]],
+            [[34.74338,	-82.038104],	[34.973136,	-81.877547],	[35.016836,	-81.803864],     [34.99232,	-81.89234]],
+            [[35.442292,	-81.156276],	[35.317128,	-81.196606],	[35.179071,	-80.828988],	[34.96345,	-81.002314]],
+            [[35.318171,	-81.66129],     [35.425907,	-81.579369],	[35.292713,	-81.558633],	[35.992345,	-80.98234]],
+            [[35.472043,	-81.257262],	[35.483254,	-81.240974],	[35.558776,	-81.217943],	[35.575905,	-81.213611]],
+            [[35.687905,	-81.369986],	[35.704544,	-81.286731],	[35.703097,	-81.217617],	[35.714002,	-81.201094]]
+        ]
+
+        var costs  = [[18.05,	22.5],
+            [12.35, 15.21],
+            [46.98, 48.47],
+            [39.58, 44.92],
+            [14.92, 11.33],
+            [12.9, 15.96],
+            [15.85, 19.5]]
+
+
+        var rand = Math.floor(Math.random()*7)
+        var all_coords = comp_ride_data[rand]
+
+        var coords = [all_coords[0], all_coords[2]]
+        var center = all_coords[1]
+
+        function set_coords() {
+
+            coords.forEach((c) => {
+                new google.maps.Marker({position: {lat: c[0], lng: c[1]}, map: map});
+            })
+
+            all_coords.forEach((c) => {
+                new google.maps.Marker({position: {lat: c[0], lng: c[1]}, map: gp_map});
+            })
+
+            generate_directions(center, coords, map, 0);
+            generate_directions(center, all_coords, gp_map, 1);
+        }
+
+        function generate_directions(center, data, map, konsa) {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map);
+
+            var waypts = [];
+
+            if (data.length > 2) {
+                waypts.push({
+                    location: {lat: data[1][0], lng: data[1][1]},
+                    stopover: true
+                })
+                waypts.push({
+                    location: {lat: data[2][0], lng: data[2][1]},
+                    stopover: true
+                })
+            }
+
+            directionsService.route({
+                origin: {lat: data[0][0], lng: data[0][1]},
+                destination: {lat: data[data.length - 1][0], lng: data[data.length - 1][1]},
+                waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function (response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                    var route = response.routes[0];
+                    var total_dist = 0
+                    var total_time = 0
+                    // For each route, display summary information.
+                    for (var i = 0; i < route.legs.length; i++) {
+                        total_dist += route.legs[i].distance.value
+                        total_time += route.legs[i].duration.value
+                    }
+                    total_dist /= 1609
+                    total_time /= 60
+                    var display_values = document.getElementById("display_values_" + konsa)
+                    var cost = konsa==0? costs[rand][0] : costs[rand][1]
+                    var str = `Total Distance = ${total_dist.toFixed(2)} miles. Total travel Time =   ${total_time.toFixed(2)}  mins. Cost is $ ${cost}<hr>`
+                    display_values.innerHTML =  str
+
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            })
+
+        }
+        setTimeout(()=> {
+            set_coords()
+        }, 2000)
+
+        // Initialize and add the map
+
+    </script>
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHhznVjkzisWwTBaAnVEImPWf6L0xoq4U&callback=initMap">
+</script>
+
+
+</body>
+
+</html>

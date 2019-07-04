@@ -168,10 +168,12 @@
     <section id='map' class="s-services light-gray">
 
         <div class="row section-header" data-aos="fade-up">
-            <div class="col-full" id="g_map">
-
+            <div class="col-full" id="g_map"></div>
+            <div class="row">
+                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_0"></h6>
+                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_1"></h6>
+                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_2"></h6>
             </div>
-            <h4 class="" id ="display_values">We have everything you need to launch and grow a successful digital business.</h4>
         </div> <!-- end section-header -->
 
 
@@ -314,28 +316,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data);
                 }
             }).done( (m) => {
                 let center = m.split("$$")[0].split(",")
                 map.setCenter(new google.maps.LatLng(parseFloat(center[0]), parseFloat(center[1])))
                 data=m.split("$$")[1]
-                console.log(data)
-                debugger
+                postalServices = m.split("$$")[2]
+                postalServices = postalServices.substring(2).slice(0, -3).split("], [")
+
+                postalServices.forEach((d) => {
+                    let k = d.split(", ")
+                    new google.maps.Marker({position: {lat: parseFloat(k[0]), lng: parseFloat(k[1])}, map: map, icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'});
+                })
+
                 data = data.substring(2).slice(0, -3).split("], [")
                 data.forEach((d) => {
                     let k = d.split(", ")
-
                     new google.maps.Marker({position: {lat: parseFloat(k[0]), lng: parseFloat(k[1])}, map: map});
                 })
 
-                generate_directions(center, data);
+                only_products = generate_directions(center, data, 0);
+                only_postal = generate_directions(center, postalServices, 1);
+                combined = generate_directions( center, data.concat(postalServices), 2)
+
+
+
+
+
+
                 // $("#color_image").attr("src","http://localhost:3000/dist/image_Output/img_0.png")
             })
         }
         $('#submit_btn').click(()=>send_image())
 
-        function generate_directions(center, data) {
+        var final_configs = []
+
+        function generate_directions(center, data, type) {
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
             directionsDisplay.setMap(map);
@@ -357,7 +373,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
                     var route = response.routes[0];
-                    console.log(route)
                     var total_dist = 0
                     var total_time = 0
                     // For each route, display summary information.
@@ -367,10 +382,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                     }
                     total_dist/=1609
                     total_time/=60
-                    var display_values = document.getElementById("display_values")
-                    var str = "Total Distance = " + total_dist.toFixed(2) +  " miles. Total travel Time =  " + total_time.toFixed(2) + " min." + " Postage & Handling Time = " + route.legs.length*2 + " mins. (2 mins per drop)"
-                    display_values.innerText = str;
+                    final_configs.push([type, total_dist.toFixed(2), total_time.toFixed(2), route.legs.length*2 ])
+                    if (final_configs.length === 3) {
+                        var costs = [];
 
+                        var str = ``;
+                        var type_array = ['Only WM Delivery', 'Only Postal', 'Combined']
+                        let i =0;
+                        final_configs.forEach((config) => {
+                            var display_values = document.getElementById("display_values_" + i)
+                            i++
+                            cost = config[1]*0.6 + (config[2]+config[3])*0.4
+                            tod = (config[2]+config[3])/(config[3]/2)
+                            costs.push([cost.toFixed(2), config[3]/2])
+                            cost_per_package = cost/config[3]/2
+                            str = `<h3>For ${type_array[config[0]]}</h3>  Distance Covered=  ${config[1]}  miles. <br>Travel Time = ${config[2]}
+                            min.<br> Handling Time = ${config[3]} mins. <br> Avg Cost/Delivery=
+                            $ ${cost_per_package.toFixed(2)}. <br> Avg Time/Delivery= ${tod.toFixed(2)} <hr>`
+                            display_values.innerHTML = str;
+
+                        })
+                    }
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }

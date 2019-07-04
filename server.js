@@ -27,8 +27,13 @@ app.use('/python', routes.python);
 
 app.use(express.static(path.join(__dirname,'/frontend')));
 
-app.get('/',(req,res)=>{
+app.get('/postal',(req,res)=>{
     res.sendFile(path.join(__dirname+'/frontend/index.html'));
+});
+
+
+app.get('/uber',(req,res)=>{
+    res.sendFile(path.join(__dirname+'/frontend/uber.html'));
 });
 
 //app.get('/home',(req,res)=>{
@@ -57,4 +62,6 @@ app.post('/fileupload', (req, res) => {
 app.use((req,res)=> res.status(404).send('page not found'));
 
 app.listen( process.env.PORT || config.SERVER.PORT ,
-    ()=> {console.log("Server started at http://localhost:" +config.SERVER.PORT)});
+    ()=> {
+        console.log("Server started at http://localhost:" +config.SERVER.PORT + "/postal")
+        console.log("Server started at http://localhost:" +config.SERVER.PORT + "/uber")});

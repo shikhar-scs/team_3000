@@ -176,7 +176,7 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1.4rem;
   line-height: 1.286;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: 0.16rem;
 }
 

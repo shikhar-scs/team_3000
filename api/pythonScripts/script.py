@@ -29,7 +29,7 @@ zipcode = pd.read_csv('api/csvFiles/LatitudeLongitude.csv')
 
 clusters = pd.read_csv('api/csvFiles/zipcode_groups.csv')
 
-r = random.randint(1, 20)
+r = random.randint(2, 18)
 cno = clusters.iloc[r,:]["Zipcode"]
 offers = clusters.iloc[r,:]["Order#"].split(",")
 
@@ -44,15 +44,16 @@ for index, row in zipcode.iterrows():
         lat=row['LAT']
         long=row['LNG']
 
-rand_x = [float(random.randrange(200, 500))/100 for i in range(0,len(offers))]
-rand_y = [float(random.randrange(200, 500))/100 for i in range(0,len(offers))]
+rnge = min(15,len(offers))
+rand_x = [float(random.randrange(200, 500))/100 for i in range(0,rnge)]
+rand_y = [float(random.randrange(200, 500))/100 for i in range(0,rnge)]
 
 r_earth = 3958.8
 pi = 3.14
 
 coords = []
 
-for i in range(0,len(offers)):
+for i in range(0,rnge):
     new_latitude  = lat  + (rand_x[i] / r_earth) * (180 / pi)
     new_longitude = long + (rand_y[i] / r_earth) * (180 / pi) / math.cos(lat * pi/180)
     coords.append([new_latitude,new_longitude])

@@ -5,6 +5,7 @@ import numpy as np
 import math
 import sys
 import csv
+import random
 
 if __name__ == "__main__":
     lat = sys.argv[1]
@@ -36,8 +37,21 @@ if __name__ == "__main__":
        dic[cluster[i]].append([coords.iloc[i, 0], coords.iloc[i, 1]])
 
     cen = str(lat) + "," + str(lon)
-    print(cen + "$$" + str(dic[3]))
 
+    rand_x = [float(random.randrange(200, 500)) / 100 for i in range(0, 6)]
+    rand_y = [float(random.randrange(200, 500)) / 100 for i in range(0, 6)]
+
+    r_earth = 3958.8
+    pi = 3.14
+
+    coords = []
+
+    for i in range(0, 6):
+        new_latitude = float(lat) + (rand_x[i] / r_earth) * (180 / pi)
+        new_longitude = float(lon) + (rand_y[i] / r_earth) * (180 / pi) / math.cos(float(lat )* pi / 180)
+        coords.append([new_latitude, new_longitude])
+
+    print(cen + "$$" + str(dic[1]) + "$$" + str(coords))
 
 
 #
