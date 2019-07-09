@@ -155,13 +155,13 @@
     <div class="row section-header" data-aos="fade-up">
         <div class="col-full col-5" style="margin-left: 5vw" >
             <div id="g_map"></div>
-            <h6 class="" id ="display_values_0"></h6>
+            <h3 class="" id ="display_values_0"></h3>
 
         </div>
 
         <div class="col-full col-5" style="margin-left: 5vw" >
             <div id="gp_map"></div>
-            <h6 class="" id ="display_values_1"></h6>
+            <h3 class="" id ="display_values_1"></h3>
 
         </div>
 
@@ -309,11 +309,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 
-        var comp_ride_data = [[[34.868734,	-81.227643],	[34.984404,	81.21328],	[34.996214,	-81.14361],	[35.102754, -81.25231]],
-            [[35.146213, -80.954235], [35.177407,	-80.927398] 	,	[35.049212,	-80.993428] ,	[35.024407,	-81.028598]],
-            [[34.74338,	-82.038104],	[34.973136,	-81.877547],	[35.016836,	-81.803864],     [34.99232,	-81.89234]],
-            [[35.442292,	-81.156276],	[35.317128,	-81.196606],	[35.179071,	-80.828988],	[34.96345,	-81.002314]],
-            [[35.318171,	-81.66129],     [35.425907,	-81.579369],	[35.292713,	-81.558633],	[35.992345,	-80.98234]],
+        var comp_ride_data = [[[34.868734,	-81.227643],	[34.984404,	-81.21328],	[34.996214,	-81.14361],	[35.016497, -81.141976]],
+            [[35.146213, -80.954235], [35.060567, -80.959543] 	,	[35.049212,	-80.993428] ,	[35.024407,	-81.028598]],
+            [[34.74338,	-82.038104],	[34.942843, -81.984521],	[35.016836,	-81.803864],     [35.016167, -81.732485]],
+            [[35.442292,	-81.156276],	[35.317128,	-81.196606],	[35.179071,	-80.828988],	[35.156992, -80.794828]],
+            [[35.318171,	-81.66129],     [35.309946, -81.620394],	[35.292713,	-81.558633],	[35.290797, -81.528727]],
             [[35.472043,	-81.257262],	[35.483254,	-81.240974],	[35.558776,	-81.217943],	[35.575905,	-81.213611]],
             [[35.687905,	-81.369986],	[35.704544,	-81.286731],	[35.703097,	-81.217617],	[35.714002,	-81.201094]]
         ]
@@ -322,12 +322,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             [12.35, 15.21],
             [46.98, 48.47],
             [39.58, 44.92],
-            [14.92, 11.33],
+            [11.33, 14.92],
             [12.9, 15.96],
             [15.85, 19.5]]
 
-
         var rand = Math.floor(Math.random()*7)
+
         var all_coords = comp_ride_data[rand]
 
         var coords = [all_coords[0], all_coords[2]]
@@ -402,11 +402,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         // Initialize and add the map
 
     </script>
-<!--Load the API from the specified URL
-* The async attribute allows the browser to render the page while the API loads
-* The key parameter will contain your own API key (which is not needed for this tutorial)
-* The callback parameter executes the initMap() function
--->
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHhznVjkzisWwTBaAnVEImPWf6L0xoq4U&callback=initMap">

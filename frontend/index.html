@@ -120,8 +120,8 @@
                     <form ref='uploadForm' id='uploadForm' method='post'  encType="multipart/form-data">
 
                     <div class="custom-file col-sm-11">
-                        <input style="font-size: 3.3rem;" type="file" name="sampleFile" accept=".csv"  id="inputGroupFile04" required/>
-<!--                        <label for="inputGroupFile04" style="background-color: transparent">Choose file</label>-->
+                        <input style="font-size: 2rem;" type="file" name="sampleFile" accept=".csv"  id="inputGroupFile04" style="border-radius: 50px" required/>
+                        <label for="inputGroupFile04" style="background-color: transparent"></label>
                     </div>
                     </form>
                     <div class="input-group-append col-sm-1" >
@@ -170,10 +170,12 @@
         <div class="row section-header" data-aos="fade-up">
             <div class="col-full" id="g_map"></div>
             <div class="row">
-                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_0"></h6>
-                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_1"></h6>
-                <h6 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_2"></h6>
+                <h3 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_0"></h3>
+                <h3 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_1"></h3>
+                <h3 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_2"></h3>
             </div>
+            <h3 class=" col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" id="display_values_4"></h3>
+
         </div> <!-- end section-header -->
 
 
@@ -185,9 +187,9 @@
             <div class="col-full">
                 <h3 class="subhead subhead--light">Contact Us</h3>
                 <h1 class="display-1 display-1--light">TEAM 3000!!</h1>
-                <h4 class="display-1 display-1--light">Get in touch at for a superior experience!!</h4>
+                <h4 class="display-1 display-1--light">Get in touch for a superior experience!!</h4>
             </div>
-        </div> <!-- end section-header -->
+        </div> <!-- end section-header -
 
         <div class="row">
 
@@ -349,7 +351,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }
         $('#submit_btn').click(()=>send_image())
 
-        var final_configs = []
+        var final_configs = []/*
+        var total_mail_cost = null;
+        var total_cobined_cost = null;
+        var total_wm_package = null;*/
 
         function generate_directions(center, data, type) {
             var directionsService = new google.maps.DirectionsService;
@@ -392,13 +397,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         final_configs.forEach((config) => {
                             var display_values = document.getElementById("display_values_" + i)
                             i++
-                            cost = config[1]*0.6 + (config[2]+config[3])*0.4
+                            cost = config[1]*0.6 + (config[2]+config[3])*0.3
+
+
                             tod = (config[2]+config[3])/(config[3]/2)
                             costs.push([cost.toFixed(2), config[3]/2])
                             cost_per_package = cost/config[3]/2
-                            str = `<h3>For ${type_array[config[0]]}</h3>  Distance Covered=  ${config[1]}  miles. <br>Travel Time = ${config[2]}
+                            str = `<h3>${type_array[config[0]]}</h3>  Distance Covered=  ${config[1]}  miles. <br>Travel Time = ${config[2]}
                             min.<br> Handling Time = ${config[3]} mins. <br> Avg Cost/Delivery=
-                            $ ${cost_per_package.toFixed(2)}. <br> Avg Time/Delivery= ${tod.toFixed(2)} <hr>`
+                            $ ${cost_per_package.toFixed(2)}. <br> Avg Time/Delivery= ${tod.toFixed(2)} min <hr>`
                             display_values.innerHTML = str;
 
                         })
@@ -409,9 +416,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             })
 
         }
-
-
-
         // Initialize and add the map
         function initMap() {
             // The location of Uluru,

@@ -7,6 +7,7 @@ import os
 import numpy as np
 
 # df = pd.read_csv('api/csvFiles/OrdersList1562157417583.csv', error_bad_lines=False)
+
 # df.dropna()
 # df = df[["Order#", "City", "State", "Zipcode"]]
 # df = df.groupby("Zipcode").agg(lambda x: list(x))
